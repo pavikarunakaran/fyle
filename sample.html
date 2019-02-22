@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="search.css">
+<script>
+
+$(document).ready(function(){
+
+  $("#btn").click(function(){
+   var name=document.getElementById("theSearch").value;
+	//alert(name);
+    $("ol").append("<li>"+name+"</li>");
+  });
+});
+
+function myFunction() {
+	var selector = document.getElementById('id_of_select');
+    var value = selector[selector.selectedIndex].value;
+	//alert(value);
+	var name=document.getElementById("theSearch").value;
+	
+	if(value=="Name"){
+    $.get("https://www.omdbapi.com/?t="+name+"&apikey=69a8c875", function(data, status){
+    	//console.log(data);
+		location.replace("pavi.html?userdata="+JSON.stringify(data, undefined, 2))
+        document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
+    });
+	}
+	else if(value=="ID"){
+		$.get("https://www.omdbapi.com/?i="+name+"&apikey=69a8c875", function(data, status){
+    	console.log(data);
+		location.replace("pavi.html?userdata="+JSON.stringify(data, undefined, 2))
+        document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
+    });
+	}
+	else {
+		$.get("https://www.omdbapi.com/?y="+name+"&apikey=69a8c875", function(data, status){
+    	console.log(data);
+		location.replace("pavi.html?userdata="+JSON.stringify(data, undefined, 2))
+        document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
+    });
+	
+	}
+}
+</script>
+<style>
+body {
+  display: block;
+  background-image: url("bg3.JPG");
+  height: 100%; 
+  width: 100%;  
+}
+</style>
+</head>
+<body>
+	<div class="bg-text">
+		<div class="button_box2">
+			Search type:
+			<select  id="id_of_select">
+				<option value="Name">Name</option>
+				<option value="ID">ID</option>
+				<option value="Year">Year</option>
+					  
+			</select>
+			<br>
+			<br>
+			<input  id="theSearch" type="text" placeholder="Search here..." required ngTrim="true" >
+			<button  onclick="myFunction()" id="button" type="submit">Search</button><br>
+			<button  id="btn" type="submit">Append</button>
+			<p>Recent Searches:</p>
+
+			<ol>
+			  
+			</ol>
+			
+			<pre id="json"></pre>
+			
+			
+		</div>
+		
+	</div>
+</body>
+</html>

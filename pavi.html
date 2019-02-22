@@ -1,0 +1,34 @@
+<html>
+<head>
+<link rel="stylesheet" href="search.css">
+<style>
+body {
+  display: block;
+  background-image: url("bg4.JPG");
+  height: 100%; 
+  width: 100%;  
+}
+</style>
+</head>
+
+<body>
+<div class="bg-text">
+		<div class="button_box2">
+			<p id="json"></p>
+			<br><br><br>
+			<button type="back"><a href="sample.html">BACK</button></a>
+		</div>
+</div>
+</body>
+<script>
+var url = new URL(window.location.href);
+
+var c = url.searchParams.get("userdata");
+console.log(c);
+//var c = c.split(",");
+//document.getElementById("json").innerHTML += c.Title + "<br>";
+document.getElementById("json").innerHTML = c;
+//alert(c.Title);
+</script>
+
+</html>
